@@ -149,6 +149,7 @@ public class AdminController {
         System.out.println("成功********");
         System.out.println(productRequest);
         productService.addProduct(productRequest);
+
 //        FileData one = fileService.getOne(productRequest.getImageId());
 //        Product product = new Product(productRequest,one);
 //        productService.saveProduct(product);
