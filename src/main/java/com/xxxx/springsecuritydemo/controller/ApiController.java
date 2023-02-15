@@ -26,6 +26,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,6 +57,20 @@ public class ApiController {
         Page<ProductResponse> productPage = productService.getProduct(true, pageable);
 
         return new Response(Rcode.Success, productPage);
+    }
+
+    @RequestMapping(path = "/app/products", method = RequestMethod.GET)
+    public List<ProductResponse> getAppProducts() {
+
+        System.out.println("成功********");
+
+        List<ProductResponse> product = productService.getProduct();
+//        List<ProductResponse> productResponses = new ArrayList<>();
+//        productResponses.add(product.get(0));
+//        productResponses.add(product.get(1));
+//        productResponses.add(product.get(3));
+
+        return product;
     }
 
     @RequestMapping(path = "/product/{id}", method = RequestMethod.GET)

@@ -8,6 +8,8 @@ import com.xxxx.springsecuritydemo.model.response.ProductResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @author: IProductService
  * @date: 2021/4/4
@@ -18,6 +20,7 @@ public interface IProductService {
 
      Page<ProductResponse> getProduct(Pageable pageable);
      Page<ProductResponse> getProduct(boolean enabled,Pageable pageable);
+     List<ProductResponse> getProduct();
      Product getProduct(Integer pageableId);
      Response getProductBy(Integer pageableId, User user);
      Product saveProduct(Product product);

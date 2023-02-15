@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -60,6 +61,12 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public List<ProductResponse> getProduct() {
+        List<ProductResponse> all = iProductRepository.getProductsBy();
+        return all;
+    }
+
+    @Override
     public Product getProduct(Integer pageableId) {
         return iProductRepository.findProductById(pageableId).orElse(null);
     }
@@ -73,7 +80,7 @@ public class ProductService implements IProductService {
         }
         Product product = productOptional.get();
         ProductResponse productResponse = new ProductResponse(product);
-        productResponse.setImageUrl(productResponse.getImageUrl()!=null?(imageGetUrl+productResponse.getImageUrl()):null);
+        productResponse.setImageUrl(productResponse.getImageUrl()!=null?(productResponse.getImageUrl()):null);
 
         if(user==null){
             return new Response(Rcode.Success,productResponse);

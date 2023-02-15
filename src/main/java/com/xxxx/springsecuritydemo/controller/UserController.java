@@ -2,6 +2,7 @@ package com.xxxx.springsecuritydemo.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xxxx.springsecuritydemo.entity.Product;
 import com.xxxx.springsecuritydemo.entity.User;
 import com.xxxx.springsecuritydemo.enums.Rcode;
 import com.xxxx.springsecuritydemo.model.Response;
@@ -71,6 +72,15 @@ public class UserController {
 
         return new Response(Rcode.Success, productPage);
     }
+
+//    @RequestMapping(path = "/app/products", method = RequestMethod.GET)
+//    public List<ProductResponse> getAppProducts() {
+//
+//        System.out.println("成功********");
+//        List<ProductResponse> product = productService.getProduct();
+//
+//        return product;
+//    }
 
 
     @RequestMapping(path = "/cart", method = RequestMethod.POST)

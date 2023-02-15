@@ -96,11 +96,11 @@ public class CustomProvider implements AuthenticationProvider {
 
         if(user.getRole()==1){
 
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_name"));
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_user"));
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_admin"));
         }else {
 
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_name"));
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_user"));
         }
 
         System.out.println("authenticate password：" + password);

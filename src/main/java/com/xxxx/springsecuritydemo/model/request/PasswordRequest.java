@@ -5,7 +5,7 @@ package com.xxxx.springsecuritydemo.model.request;
  * @date: 2021/11/22
  * @description:
  */
-@Getter
-@Setter
-public class PasswordRequest {
-}
+//@Getter
+//@Setter
+//public class PasswordRequest {
+//}

@@ -43,9 +43,19 @@ public class LoginController {
         return new Response();
     }
 
+//    @RequestMapping(path = "/aa", method = RequestMethod.GET)
+//    public Response aa() {
+//        System.out.println("/aa");
+//        return new Response();
+//    }
     @RequestMapping(path = "/aa", method = RequestMethod.GET)
-    public Response aa() {
+    public String aa() {
         System.out.println("/aa");
+        return "OOOOOOOOOOOOOOOOO";
+    }
+    @RequestMapping(path = "/aaa", method = RequestMethod.POST)
+    public Response aaa() {
+        System.out.println("/aaa");
         return new Response();
     }
 }

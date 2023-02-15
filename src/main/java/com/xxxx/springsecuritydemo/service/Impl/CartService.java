@@ -28,6 +28,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class CartService implements ICartService {
+
     @Autowired
     private IUserRepository iUserRepository;
 
@@ -39,16 +40,12 @@ public class CartService implements ICartService {
 
 
 
-
     @Override
     public CartsResponse getByUser(User user) {
         List<CartResponse> cartByUser = iCartRepository.getCartByUser(user);
         CartsResponse cartsResponse = new CartsResponse(cartByUser);
         return cartsResponse;
     }
-
-
-
 
 
     @Override

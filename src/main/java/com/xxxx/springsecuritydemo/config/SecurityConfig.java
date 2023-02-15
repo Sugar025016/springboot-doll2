@@ -98,7 +98,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //hasRole角色設定，注意在 CustomProvider 裡面設定角色要加ROLE_，grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_admin"));
 //                .antMatchers("/user/**").hasRole("user")
                 //hasRole角色設定，注意在 CustomProvider 裡面設定角色要加ROLE_，grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_admin"));
-                .antMatchers("/user/**").access("hasRole('user')")
+//                .antMatchers("/user/**").access("hasRole('user')")
+                .antMatchers("/user/**").hasRole("user")
                 .and()
 
                 //可用formData和Params登入
@@ -106,7 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //登入頁面注意登入後，未定義時預設是login
 //                .loginPage("/api/showLogin")
                 //登入街口 ， 資料用 POST form-data 接，注意登入後再登入會出現 "status": 404, "error": "Not Found" ，未定義時預設 = .loginPage()
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/api/login")
                 .usernameParameter("username")
                 //自定義接值 密碼名稱 ，未定義時預設是 password
                 .passwordParameter("password")
@@ -162,8 +163,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf().disable();
         //設定慧登入時呼叫API重新定向
 
-        http.csrf().ignoringAntMatchers("/login");
-        http.csrf().ignoringAntMatchers("/logout");
+        //csrf是禁止劉籃器以外的堧體訪問，測試期間要關掉，否則postman會無法連接
+        http.csrf().ignoringAntMatchers("/api/login");
+        http.csrf().ignoringAntMatchers("/api/**");
+        http.csrf().ignoringAntMatchers("/**/**");
+        http.csrf().ignoringAntMatchers("/api/logout");
         //前後端分離將csrf(X-XSRF-TOKEN或XSRF-TOKEN)存在cookie
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
