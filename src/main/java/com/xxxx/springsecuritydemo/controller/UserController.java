@@ -115,6 +115,15 @@ public class UserController {
 
         return response;
     }
+    @RequestMapping(path = "/cart", method = RequestMethod.DELETE)
+    public Response deleteCart( Authentication authentication) {
+
+        System.out.println("成功********authentication");
+        System.out.println(authentication);
+        Response response = cartService.clearCart( (User) authentication.getPrincipal());
+
+        return response;
+    }
 
 
     @RequestMapping(path = "/showLogin1", method = RequestMethod.GET)
@@ -144,6 +153,7 @@ public class UserController {
 
         return response;
     }
+
 
     @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
     public Response getOrder(@PathVariable() int orderId, Authentication authentication) {

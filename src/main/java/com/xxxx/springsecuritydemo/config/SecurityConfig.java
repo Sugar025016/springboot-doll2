@@ -201,7 +201,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Bean
 //    public LoginFilter loginFilter() throws Exception {
-//        LoginFilter filter = new LoginFilter("/api/login");
+//        LoginFilter filter = new LoginFilter("/login");
 //        filter.setAuthenticationManager(authenticationManager());
 //        return filter;
 //    }
