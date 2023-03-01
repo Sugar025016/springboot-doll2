@@ -1,9 +1,11 @@
 package com.xxxx.springsecuritydemo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
@@ -19,9 +21,15 @@ import java.util.Date;
 public class TimePeriod {
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
+//    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     java.sql.Time startTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
+//    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     java.sql.Time endTime;
 
 

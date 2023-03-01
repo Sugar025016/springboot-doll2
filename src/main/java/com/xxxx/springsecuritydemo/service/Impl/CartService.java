@@ -105,4 +105,13 @@ public class CartService implements ICartService {
         System.out.println("delete:"+l);
         return new Response(Rcode.Success);
     }
+
+    @Override
+    public Response clearCart(User user) {
+
+        long l = iCartRepository.deleteByUser( user);
+        System.out.println("delete:"+l);
+
+        return new Response(Rcode.Success);
+    }
 }

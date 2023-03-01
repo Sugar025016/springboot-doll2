@@ -24,6 +24,7 @@ public interface ICartService {
     int getCartCount(User user);
 
     Response deleteCart(int id, User user);
+    Response clearCart( User user);
 
 
 }

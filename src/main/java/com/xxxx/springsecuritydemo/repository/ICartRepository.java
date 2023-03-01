@@ -29,6 +29,8 @@ public interface ICartRepository extends JpaRepository<Cart,Integer> {
     @Modifying
     long deleteByIdAndUser(int id ,User user);
 
+    @Modifying
+    long deleteByUser(User user);
 
     Optional<Cart> findByProductAndUser(Product product , User user);
 

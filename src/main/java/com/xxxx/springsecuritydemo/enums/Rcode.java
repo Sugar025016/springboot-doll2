@@ -19,6 +19,7 @@ public enum  Rcode {
     Account_Duplicate(103,"帳戶重複"),//帳戶不存在
     Path_Incorrect(105,"帳號或密碼錯誤"),//帳號或密碼錯誤
     Error(109,"錯誤"),//帳號或密碼錯誤
+    EXCEPTION(209,"列外"),//帳號或密碼錯誤或csrf錯誤
     Account_Blocked(103,"帳戶被封鎖"),//帳戶被封鎖
     Account_Role_Error(104,"成功"),
     Email_Already_Used(112,"成功"),

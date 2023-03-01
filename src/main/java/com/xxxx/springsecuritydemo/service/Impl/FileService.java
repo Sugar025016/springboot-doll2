@@ -32,6 +32,8 @@ public class FileService implements IFileService {
     String imagePutUrl;
     @Value("${imagePutUrl2}")
     String imagePutUrl2;
+    @Value("/home/jessie/work/my/img/")
+    String ubuntuImgUrl;
 
     @Override
     public FileData getOne(Integer id) {
@@ -59,7 +61,8 @@ public class FileService implements IFileService {
         long round = Math.round(Math.random() * 10000);
         long time = date.getTime();
         String fileName= String.valueOf(time)+round;
-        String filePath = imagePutUrl+"/"+fileName+suffix;
+//        String filePath = imagePutUrl+"/"+fileName+suffix;
+        String filePath = ubuntuImgUrl+fileName+suffix;
         File file = new File(filePath);
         if(!file.getParentFile().exists()){
             file.getParentFile().mkdirs();

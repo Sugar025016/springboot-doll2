@@ -9,6 +9,7 @@ import com.xxxx.springsecuritydemo.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -93,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/**", "/resources/**", "/static/**", "/webjars/**").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/admin/**").hasRole("admin")
                 //hasRole角色設定，注意在 CustomProvider 裡面設定角色要加ROLE_，grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_admin"));
 //                .antMatchers("/user/**").hasRole("user")
@@ -107,7 +108,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //登入頁面注意登入後，未定義時預設是login
 //                .loginPage("/api/showLogin")
                 //登入街口 ， 資料用 POST form-data 接，注意登入後再登入會出現 "status": 404, "error": "Not Found" ，未定義時預設 = .loginPage()
-                .loginProcessingUrl("/api/login")
+                .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 //自定義接值 密碼名稱 ，未定義時預設是 password
                 .passwordParameter("password")
@@ -132,7 +133,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMeParameter("remember-me")//連嵐氣儲存cookie名，預設remember-me
                 .tokenRepository(persistentTokenRepository())
                 // 有效时间：单位s
-                .tokenValiditySeconds(60)
+                .tokenValiditySeconds(600)
 //                .userDetailsService(userDetailsService)
                 .and()
                 .logout()
@@ -154,7 +155,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint((req, resp, authException) -> {
                     resp.setContentType("application/json;charset=utf-8");
                     PrintWriter out = resp.getWriter();
-                    out.write(new ObjectMapper().writeValueAsString(new Response(Rcode.Error)));
+                    out.write(new ObjectMapper().writeValueAsString(new Response(Rcode.EXCEPTION)));
                     out.flush();
                     out.close();
                 });
@@ -163,13 +164,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf().disable();
         //設定慧登入時呼叫API重新定向
 
-        //csrf是禁止劉籃器以外的堧體訪問，測試期間要關掉，否則postman會無法連接
-        http.csrf().ignoringAntMatchers("/api/login");
-        http.csrf().ignoringAntMatchers("/api/**");
-        http.csrf().ignoringAntMatchers("/**/**");
-        http.csrf().ignoringAntMatchers("/api/logout");
         //前後端分離將csrf(X-XSRF-TOKEN或XSRF-TOKEN)存在cookie
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        //csrf是禁止劉籃器以外的堧體訪問，測試期間要關掉，否則postman會無法連接
+        http.csrf().ignoringAntMatchers("/login*");
+        http.csrf().ignoringAntMatchers("/api/**");
+//        http.csrf().ignoringAntMatchers("/user/**");
+//        http.csrf().ignoringAntMatchers("/logout");
 
         //將csrf(X-XSRF-TOKEN或XSRF-TOKEN)存在from data
         //http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository());

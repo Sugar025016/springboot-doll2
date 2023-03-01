@@ -20,6 +20,7 @@ import java.util.List;
 public class CartResponse {
 
     private Integer id;
+    private Integer productId;
 
     private String title;
 
@@ -32,7 +33,10 @@ public class CartResponse {
     public CartResponse(Cart cart) {
         BeanUtils.copyProperties(cart.getProduct(),this);
         this.id=cart.getId();
+        System.out.println(                "        this.id=cart.getId();");
+        System.out.println(             this.id);
         this.qty=cart.getQty();
+        this.productId=cart.getProduct().getId();
         total=cart.getQty()*(cart.getProduct().getPrice()==null?cart.getProduct().getOriginPrice():cart.getProduct().getPrice());
         totalOriginPrice=cart.getQty()*cart.getProduct().getOriginPrice();
     }

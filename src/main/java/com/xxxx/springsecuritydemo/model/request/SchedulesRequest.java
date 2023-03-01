@@ -1,5 +1,6 @@
 package com.xxxx.springsecuritydemo.model.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import com.xxxx.springsecuritydemo.enums.RangeTypeEnums;
 import com.xxxx.springsecuritydemo.model.TimePeriod;
@@ -9,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,9 +24,13 @@ import java.util.stream.Collectors;
 public class SchedulesRequest {
 
     @Future(message = "請輸入正確的日期")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    //DateTimeFormat舊版需要JsonFormat來設定時區，新版@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "Asia/Taipei")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date startDate;
     @Future(message = "請輸入正確的日期")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    //DateTimeFormat舊版需要JsonFormat來設定時區，新版有timezone可以設定時區@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "Asia/Taipei")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date endDate;
 
@@ -49,6 +55,11 @@ public class SchedulesRequest {
 
     public void setOpenTime(List<TimePeriod> openTime) {
         this.times = openTime;
+    }
+
+    public void setStartDate(Date startDate) {
+        System.out.println("startDate:"+startDate);
+        this.startDate = startDate;
     }
 
     public void setCalendarChooseList(List<Integer> calendarChooseList) {

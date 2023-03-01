@@ -17,9 +17,8 @@ import java.util.List;
 @Data
 public class ScheduleRequest {
 
-
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd ")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     public Date date;
 
     List<TimePeriod> openTime;
@@ -28,6 +27,7 @@ public class ScheduleRequest {
 
 
     public void setOpenTime(List<TimePeriod> openTime) {
+
         this.openTime = openTime;
     }
 
@@ -36,6 +36,7 @@ public class ScheduleRequest {
     }
 
     public void setOutTime(List<TimePeriod> outTime) {
+
         this.outTime = outTime;
     }
 }
